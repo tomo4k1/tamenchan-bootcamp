@@ -1,0 +1,97 @@
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+    align-items: center;
+}
+
+.hand-section {
+    padding: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hand-grid {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.message-area {
+    min-height: 60px;
+    text-align: center;
+}
+
+.message-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.neon-text {
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px var(--primary-neon),
+        0 0 82px var(--primary-neon);
+    animation: pulsate 1.5s infinite alternate;
+}
+
+.wrong-text {
+    color: #ff4d4d;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+@keyframes pulsate {
+    100% {
+        text-shadow:
+            0 0 4px #fff,
+            0 0 10px #fff,
+            0 0 18px #fff,
+            0 0 38px var(--primary-neon),
+            0 0 73px var(--primary-neon);
+    }
+}
+
+.answer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.instruction {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.numpad {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.result-details {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flex-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gal-btn.primary {
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+}

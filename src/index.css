@@ -1,0 +1,80 @@
+:root {
+  /* Gal Universe Palette */
+  --bg-deep: #0f0c29;
+  --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  
+  --primary-neon: #ff00ff; /* Shocking Pink */
+  --secondary-cyan: #00ffff; /* Cyber Cyan */
+  --accent-yellow: #fffa00; /* Pikapika Yellow */
+  --text-main: #ffffff;
+  --text-dim: #b3b3b3;
+
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+  --font-main: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Text Gradients */
+.text-gradient {
+  background: linear-gradient(90deg, var(--secondary-cyan), var(--primary-neon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+/* Button Reset & Style */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.gal-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--primary-neon);
+  color: var(--primary-neon);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.gal-btn:hover {
+  background: var(--primary-neon);
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+  transform: translateY(-2px);
+}
