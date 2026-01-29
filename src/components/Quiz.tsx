@@ -21,12 +21,25 @@ export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
     const [decomposition, setDecomposition] = useState<number[][] | null>(null);
 
     useEffect(() => {
+        const loadProblem = () => {
+            try {
+                const p = generateProblem(13, difficulty);
+                setProblem(p);
+                setSelectedWaits([]);
+                setDecomposition(null);
+                setGameState('playing');
+                setMessage(GAL_MESSAGES.start);
+            } catch (e) {
+                console.error(e);
+                setMessage("エラー出ちゃった🥺 リロードして！");
+            }
+        };
         loadProblem();
-    }, []);
+    }, [difficulty]);
 
-    const loadProblem = () => {
+    const loadNextProblem = () => {
         try {
-            const p = generateProblem(13, difficulty); // Default to hard mode (13 tiles)
+            const p = generateProblem(13, difficulty);
             setProblem(p);
             setSelectedWaits([]);
             setDecomposition(null);
@@ -104,7 +117,7 @@ export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
                         ファイナルアンサー？ ✨
                     </button>
                 ) : (
-                    <button className="gal-btn secondary" onClick={loadProblem}>
+                    <button className="gal-btn secondary" onClick={loadNextProblem}>
                         次の問題へ 🚀
                     </button>
                 )}
