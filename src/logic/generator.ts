@@ -1,9 +1,8 @@
-import { getWaits, type Hand } from './mahjong';
+import { getWaits } from './mahjong';
+import { type Problem } from '../types';
 
-export interface Problem {
-    hand: Hand;
-    waits: number[];
-}
+// Re-export Problem type for backward compatibility
+export type { Problem } from '../types';
 
 /**
  * Generates a random Mahjong problem (Chinitsu shape).

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { generateProblem, type Problem } from '../logic/generator';
+import { generateProblem } from '../logic/generator';
 import { getWinningDecomposition } from '../logic/mahjong';
+import { type Problem, type GalMessages, type GameState } from '../types';
 import { Tile } from './Tile';
 import './Quiz.css';
 
-const GAL_MESSAGES = {
+const GAL_MESSAGES: GalMessages = {
     start: "準備はいい？爆速で解いてこ！🔥",
     correct: "キャー！天才すぎ！💖 その調子！",
     wrong: "おっしい〜💦 でも次は絶対イケるし！",
@@ -14,7 +15,7 @@ const GAL_MESSAGES = {
 export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
     const [problem, setProblem] = useState<Problem | null>(null);
     const [selectedWaits, setSelectedWaits] = useState<number[]>([]);
-    const [gameState, setGameState] = useState<'playing' | 'result'>('playing');
+    const [gameState, setGameState] = useState<GameState>('playing');
     const [isCorrect, setIsCorrect] = useState(false);
     const [message, setMessage] = useState(GAL_MESSAGES.start);
     const [decomposition, setDecomposition] = useState<number[][] | null>(null);

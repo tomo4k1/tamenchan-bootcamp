@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import './index.css'
-import { Quiz } from './components/Quiz'
+import { useState } from 'react';
+import { type Difficulty } from './types';
+import './index.css';
+import { Quiz } from './components/Quiz';
 
 function App() {
   const [inGame, setInGame] = useState(false);
-  const [difficulty, setDifficulty] = useState<1 | 2 | 3>(3); // 1: Any, 2: >=2, 3: >=3
+  const [difficulty, setDifficulty] = useState<Difficulty>(3); // 1: Any, 2: >=2, 3: >=3
 
   return (
     <>
@@ -24,7 +25,7 @@ function App() {
               {[1, 2, 3].map(level => (
                 <button
                   key={level}
-                  onClick={() => setDifficulty(level as 1 | 2 | 3)}
+                  onClick={() => setDifficulty(level as Difficulty)}
                   style={{
                     padding: '8px 16px',
                     borderRadius: '20px',

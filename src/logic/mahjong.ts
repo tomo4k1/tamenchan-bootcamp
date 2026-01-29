@@ -4,8 +4,8 @@
  * Since we focus on Polyhedrons (shapes), we assume one suit.
  */
 
-// A hand for waiting checks usually has 13 tiles (or 1, 4, 7, 10...).
-export type Hand = number[];
+// Re-export Hand type for backward compatibility
+export type { Hand } from '../types';
 
 /**
  * Check if the hand (must be 14 tiles usually) is a winning hand (4 sets + 1 pair).

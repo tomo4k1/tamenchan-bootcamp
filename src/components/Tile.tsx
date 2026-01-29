@@ -1,12 +1,6 @@
 import React from 'react';
+import { type TileProps } from '../types';
 import './Tile.css';
-
-interface TileProps {
-    value: number; // 1-9
-    onClick?: () => void;
-    selected?: boolean;
-    size?: 'sm' | 'md' | 'lg';
-}
 
 const TILE_MAP: Record<number, string> = {
     1: '🀇', 2: '🀈', 3: '🀉', 4: '🀊', 5: '🀋', 6: '🀌', 7: '🀍', 8: '🀎', 9: '🀏'
