@@ -244,6 +244,35 @@ export function getWaits(hand: number[]): number[] {
 
 ## Git Workflow
 
+**Branch Creation:**
+
+Before creating a new branch, **always** update your local main branch:
+
+```bash
+# Switch to main branch
+git checkout main
+
+# Pull latest changes from remote
+git pull origin main
+
+# Now create your feature branch
+git checkout -b feat/your-feature-name
+```
+
+**Branch Naming Convention:**
+- `feat/` - New features (e.g., `feat/add-scoring-system`)
+- `fix/` - Bug fixes (e.g., `fix/quiz-useeffect-dependencies`)
+- `docs/` - Documentation updates (e.g., `docs/update-readme`)
+- `refactor/` - Code refactoring (e.g., `refactor/simplify-mahjong-logic`)
+- `test/` - Test additions/updates (e.g., `test/add-generator-tests`)
+- `chore/` - Maintenance tasks (e.g., `chore/update-dependencies`)
+
+**Why Update Main First?**
+- Prevents merge conflicts later
+- Ensures you're working with the latest code
+- Makes PR reviews easier
+- Reduces integration issues
+
 **Commit Messages:**
 - Use conventional commit format: `type: description`
 - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
