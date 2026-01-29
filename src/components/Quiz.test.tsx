@@ -220,13 +220,56 @@ describe('Quiz', () => {
 
         render(<Quiz />);
         
-        // Should have logged the error
+        // Should show error message
         await waitFor(() => {
-            expect(consoleErrorSpy).toHaveBeenCalled();
+            expect(screen.getByText(/エラー出ちゃった/)).toBeInTheDocument();
         });
         
-        // Error is caught and logged, but component shows loading state since problem is null
-        expect(screen.getByText(/問題作ってるよ〜ん⏳/)).toBeInTheDocument();
+        // Should show retry button
+        expect(screen.getByText(/もう一度試す/)).toBeInTheDocument();
+        
+        // Should show error details
+        expect(screen.getByText(/問題が生成できませんでした/)).toBeInTheDocument();
+        
+        consoleErrorSpy.mockRestore();
+    });
+
+    it('retries problem generation when retry button is clicked', async () => {
+        const user = userEvent.setup();
+        const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+        
+        const mockGenerateProblem = vi.spyOn(generator, 'generateProblem')
+            .mockImplementationOnce(() => {
+                throw new Error('First attempt failed');
+            })
+            .mockReturnValueOnce({
+                hand: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7],
+                waits: [7]
+            });
+
+        render(<Quiz />);
+        
+        // Wait for error to appear
+        await waitFor(() => {
+            expect(screen.getByText(/エラー出ちゃった/)).toBeInTheDocument();
+        });
+        
+        // Click retry button
+        const retryButton = screen.getByText(/もう一度試す/);
+        await user.click(retryButton);
+        
+        // Should show loading message briefly
+        await waitFor(() => {
+            expect(screen.getByText(/問題作ってるよ〜ん/)).toBeInTheDocument();
+        });
+        
+        // Should successfully load problem after retry
+        await waitFor(() => {
+            expect(screen.getByText(/準備はいい？爆速で解いてこ！/)).toBeInTheDocument();
+        });
+        
+        // Should have called generateProblem twice
+        expect(mockGenerateProblem).toHaveBeenCalledTimes(2);
         
         consoleErrorSpy.mockRestore();
     });

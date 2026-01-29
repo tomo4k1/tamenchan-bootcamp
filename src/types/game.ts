@@ -17,7 +17,7 @@ export interface Problem {
 /**
  * Current state of the game
  */
-export type GameState = 'playing' | 'result';
+export type GameState = 'playing' | 'result' | 'error';
 
 /**
  * Difficulty level
