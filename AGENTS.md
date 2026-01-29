@@ -23,13 +23,13 @@ npm run lint -- --fix    # Auto-fix linting issues
 
 ### Testing
 ```bash
-npx vitest               # Run all tests in watch mode
-npx vitest run           # Run all tests once
+npm run test             # Run all tests in watch mode
+npm run test:run         # Run all tests once
+npm run test:ui          # Run tests with interactive UI
+npm run test:coverage    # Run tests with coverage report
 npx vitest run src/logic/mahjong.test.ts  # Run single test file
 npx vitest run -t "Chuuren"              # Run tests matching pattern
 ```
-
-Note: No test script in package.json yet. Use `npx vitest` directly.
 
 ## Code Style Guidelines
 
