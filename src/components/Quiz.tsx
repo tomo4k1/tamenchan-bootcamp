@@ -19,6 +19,7 @@ export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
     const [isCorrect, setIsCorrect] = useState(false);
     const [message, setMessage] = useState(GAL_MESSAGES.start);
     const [decomposition, setDecomposition] = useState<number[][] | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     useEffect(() => {
         const loadProblem = () => {
@@ -29,9 +30,13 @@ export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
                 setDecomposition(null);
                 setGameState('playing');
                 setMessage(GAL_MESSAGES.start);
+                setErrorMessage('');
             } catch (e) {
                 console.error(e);
-                setMessage("エラー出ちゃった🥺 リロードして！");
+                const error = e instanceof Error ? e : new Error('Unknown error');
+                setGameState('error');
+                setErrorMessage(error.message);
+                setMessage("エラー出ちゃった🥺");
             }
         };
         loadProblem();
@@ -45,10 +50,22 @@ export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
             setDecomposition(null);
             setGameState('playing');
             setMessage(GAL_MESSAGES.start);
+            setErrorMessage('');
         } catch (e) {
             console.error(e);
-            setMessage("エラー出ちゃった🥺 リロードして！");
+            const error = e instanceof Error ? e : new Error('Unknown error');
+            setGameState('error');
+            setErrorMessage(error.message);
+            setMessage("エラー出ちゃった🥺");
         }
+    };
+
+    const retryLoadProblem = () => {
+        setMessage(GAL_MESSAGES.loading);
+        setGameState('playing');
+        setTimeout(() => {
+            loadNextProblem();
+        }, 100);
     };
 
     const toggleWait = (num: number) => {
@@ -73,6 +90,31 @@ export const Quiz: React.FC<{ difficulty?: number }> = ({ difficulty = 3 }) => {
         setGameState('result');
         setMessage(isMatch ? GAL_MESSAGES.correct : GAL_MESSAGES.wrong);
     };
+
+    if (gameState === 'error') {
+        return (
+            <div className="quiz-container">
+                <div className="result-details glass-panel">
+                    <h2 className="message-text" style={{ color: '#ff6b6b' }}>
+                        {message}
+                    </h2>
+                    <p className="text-dim" style={{ marginTop: '1rem' }}>
+                        {errorMessage || "難易度が高すぎて問題が見つからないかも..."}
+                    </p>
+                    <p className="text-dim" style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                        問題が生成できませんでした 😢
+                    </p>
+                    <button 
+                        className="gal-btn primary" 
+                        onClick={retryLoadProblem}
+                        style={{ marginTop: '1rem' }}
+                    >
+                        もう一度試す 🔄
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     if (!problem) return <div className="loading">{GAL_MESSAGES.loading}</div>;
 
