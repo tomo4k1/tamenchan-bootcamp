@@ -21,6 +21,15 @@
     filter: brightness(1.05);
 }
 
+.tile:focus {
+    outline: 3px solid var(--secondary-cyan);
+    outline-offset: 2px;
+}
+
+.tile:focus:not(:focus-visible) {
+    outline: none;
+}
+
 .tile.selected {
     transform: translateY(-10px);
     box-shadow:
