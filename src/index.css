@@ -59,6 +59,20 @@ button {
   font-family: inherit;
 }
 
+button:focus {
+  outline: 3px solid var(--secondary-cyan);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .gal-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid var(--primary-neon);
@@ -72,7 +86,7 @@ button {
   box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
 }
 
-.gal-btn:hover {
+.gal-btn:hover:not(:disabled) {
   background: var(--primary-neon);
   color: white;
   box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);

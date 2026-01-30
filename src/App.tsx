@@ -21,11 +21,13 @@ function App() {
 
           <div style={{ marginBottom: '2rem' }}>
             <p className="text-dim" style={{ marginBottom: '0.5rem' }}>難易度を選んで！😎</p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }} role="group" aria-label="難易度選択">
               {[1, 2, 3].map(level => (
                 <button
                   key={level}
                   onClick={() => setDifficulty(level as Difficulty)}
+                  aria-label={`難易度${level === 1 ? '初級' : level === 2 ? '中級' : '上級'}を選択`}
+                  aria-pressed={difficulty === level}
                   style={{
                     padding: '8px 16px',
                     borderRadius: '20px',
@@ -42,7 +44,7 @@ function App() {
             </div>
           </div>
 
-          <button className="gal-btn" onClick={() => setInGame(true)}>
+          <button className="gal-btn" onClick={() => setInGame(true)} aria-label="トレーニングを開始">
             Start Training ({difficulty === 1 ? '初級' : difficulty === 2 ? '中級' : '上級'}) 🔥
           </button>
         </div>
@@ -52,6 +54,7 @@ function App() {
             className="text-dim"
             style={{ alignSelf: 'flex-start', marginBottom: '1rem', background: 'none', border: 'none', cursor: 'pointer' }}
             onClick={() => setInGame(false)}
+            aria-label="ホーム画面に戻る"
           >
             ← Back to Home
           </button>

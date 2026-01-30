@@ -300,8 +300,8 @@ describe('Quiz', () => {
         });
 
         // Click on the wait tile to show decomposition
-        const waitTiles = document.querySelectorAll('.result-details .flex-row > div');
-        await user.click(waitTiles[0] as Element);
+        const waitTileButtons = document.querySelectorAll('.result-details .flex-row > button');
+        await user.click(waitTileButtons[0] as Element);
 
         // Should show decomposition
         await waitFor(() => {
